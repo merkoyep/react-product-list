@@ -5,7 +5,7 @@ export const InventoryData = ({ selectedCategory }) => {
   const [inventoryValue, setInventoryValue] = useState('0.00');
   const [totalUnits, setTotalUnits] = useState(0);
   useEffect(() => {
-    if (selectedCategory) {
+    if (selectedCategory !== 'All') {
       const filteredItems = data.filter(
         (item) => item.category === selectedCategory
       );
@@ -50,7 +50,7 @@ export const InventoryData = ({ selectedCategory }) => {
           }}
         >
           <h3>Inventory:</h3>
-          <p>{totalUnits}</p>
+          <p>{totalUnits.toLocaleString()}</p>
         </div>
         <div
           style={{
@@ -60,7 +60,13 @@ export const InventoryData = ({ selectedCategory }) => {
           }}
         >
           <h3>Value</h3>
-          <p>${inventoryValue}</p>
+          <p>
+            $
+            {parseFloat(inventoryValue).toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
+          </p>
         </div>
       </div>
     </div>

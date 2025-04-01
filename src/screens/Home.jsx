@@ -4,19 +4,22 @@ import data from '../data.json';
 import { ProductCard } from '../components/ProductCard.jsx';
 import React, { useState, useEffect } from 'react';
 import { InventoryData } from '../components/InventoryData';
+import { ShoppingCart } from '../components/ShoppingCart';
 
 export const Home = () => {
   const { uniqueCatArray } = FormattedData();
   const [selectedCategory, setSelectedCategory] = useState('');
   const [filteredProducts, setFilteredProducts] = useState(data);
+  const [cartItems, setCartItems] = useState([]);
+  const [displayCart, setDisplayCart] = useState(false);
 
   useEffect(() => {
-    if (selectedCategory) {
+    if (selectedCategory && selectedCategory !== 'All') {
       const filtered = data.filter(
         (product) => product.category === selectedCategory
       );
       setFilteredProducts(filtered);
-    } else {
+    } else if (selectedCategory === 'All') {
       setFilteredProducts(data);
     }
   }, [selectedCategory]);
@@ -36,11 +39,11 @@ export const Home = () => {
       >
         <button
           style={
-            selectedCategory
-              ? null
-              : { backgroundColor: 'gray', color: 'white' }
+            selectedCategory === 'All'
+              ? { backgroundColor: 'gray', color: 'white' }
+              : null
           }
-          onClick={() => setSelectedCategory('')}
+          onClick={() => setSelectedCategory('All')}
         >
           All
         </button>
@@ -52,8 +55,22 @@ export const Home = () => {
             selectedCategory={selectedCategory}
           />
         ))}
+        <button
+          style={
+            displayCart ? { backgroundColor: 'gray', color: 'white' } : null
+          }
+          onClick={() => setDisplayCart(!displayCart)}
+        >
+          Cart
+        </button>
       </div>
-      <div></div>
+      <div>
+        <div>
+          {displayCart && (
+            <ShoppingCart items={cartItems} setItems={setCartItems} />
+          )}
+        </div>
+      </div>
       <InventoryData selectedCategory={selectedCategory} />
 
       <div
@@ -66,7 +83,11 @@ export const Home = () => {
         }}
       >
         {filteredProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard
+            key={product.id}
+            product={product}
+            setCartItems={setCartItems}
+          />
         ))}
       </div>
     </div>

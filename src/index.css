@@ -25,10 +25,13 @@ h3 {
   width: 200px;
   height: 200px;
   border-radius: 2rem;
-  gap: 2px;
-  align-items: space-between;
   justify-content: space-between;
+  align-items: center;
   padding: 1rem;
+}
+
+.cardLineItems {
+  width: 100%;
 }
 
 .productsContainer {
@@ -42,11 +45,75 @@ h3 {
   gap: 5px;
 }
 .productLineItem {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
+  display: flex;
+  justify-content: space-between;
 }
 .inventorySection {
   display: flex;
   flex-direction: column;
+}
+#addToCart {
+  width: 50%;
+}
+
+.cartLineItem {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cartTotal {
+  text-align: right;
+}
+.cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid black;
+  margin: 10px;
+  width: 33%;
+  padding: 10px;
+  border-radius: 1rem;
+}
+.cartContainer {
+  display: flex;
+  justify-content: center;
+}
+.cartLineItems {
+  width: 100%;
+}
+
+.cartLineItem {
+  padding: 5px 0 5px 0;
+}
+
+h1 {
+  margin: 0;
+}
+
+.discountLine {
+  text-align: right;
+  padding-top: 10px;
+  color: green;
+  font-style: italic;
+}
+#subtotal {
+  text-align: right;
+  padding-top: 10px;
+  font-style: italic;
+}
+#clearCart {
+  color: red;
+  border: none;
+  border-radius: 5px;
+  align-self: flex-end;
+  margin-left: auto;
+}
+
+.productDescription {
+  text-align: center;
+}
+
+#error {
+  color: red;
 }
